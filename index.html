@@ -136,6 +136,25 @@
   .similar-wine-item a{ color: var(--maroon-deep); text-decoration:none; }
   .similar-wine-item a:hover{ text-decoration:underline; }
   .similar-wine-item .swp{ color: var(--gold); font-weight:600; white-space:nowrap; }
+  /* BOTÃO VOLTAR (flutuante) */
+  .back-btn{
+    position: fixed; right: 20px; bottom: 20px; z-index: 60;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--maroon-deep); color: var(--parchment);
+    border: 1px solid var(--gold); border-radius: 30px;
+    padding: 12px 18px; font-family:'Cinzel', serif; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+    opacity: 0; visibility: hidden; transform: translateY(12px);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  }
+  .back-btn.show{ opacity: 1; visibility: visible; transform: translateY(0); }
+  .back-btn svg{ width: 14px; height: 14px; stroke: var(--gold-light); fill: none; }
+  .back-btn:hover{ background: var(--maroon); }
+  @media (max-width: 600px){
+    .back-btn{ right: 14px; bottom: 14px; padding: 11px 14px; font-size: 11px; }
+  }
+
   .out-of-stock-notice{
     margin-top:26px; padding:16px 18px; border:1px solid var(--maroon-deep); border-radius:8px;
     background: rgba(87,18,29,0.06); color: var(--maroon-deep); font-style:italic;
@@ -352,11 +371,15 @@
 <div class="topbar" id="topo">
   <div class="brand"><img src="data:image/jpeg;base64,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" alt="Adega do Vizinho">Adega do Vizinho</div>
   <nav>
-    <a href="#topo">Início</a>
     <a href="#lista">Carta de Vinhos</a>
     <a href="#fichas">Sobre os Vinhos</a>
   </nav>
 </div>
+
+<button type="button" class="back-btn" id="backBtn" aria-label="Voltar para onde você estava">
+  <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  Voltar
+</button>
 
 <header class="hero">
   <div class="hero-inner">
@@ -4463,6 +4486,61 @@
   });
 })();
 </script>
+<script>
+(function(){
+  var backBtn = document.getElementById('backBtn');
+  if(!backBtn) return;
+
+  var savedPos = null;
+
+  function savePos(){
+    // só guarda se ainda não tiver uma posição pendente,
+    // assim uma sequência de pesquisas sempre volta pro início dela
+    if(savedPos === null){
+      savedPos = window.scrollY;
+    }
+  }
+
+  function goBack(){
+    var target = (savedPos !== null) ? savedPos : 0;
+    window.scrollTo({ top: target, behavior: 'smooth' });
+    savedPos = null;
+  }
+
+  backBtn.addEventListener('click', goBack);
+
+  // pesquisa por nome do vinho
+  var searchInput = document.getElementById('wineSearchInput');
+  if(searchInput){ searchInput.addEventListener('input', savePos); }
+
+  // abas da carta (Preços / Harmonização / Corpo)
+  document.querySelectorAll('.catalog-tab-btn').forEach(function(btn){
+    btn.addEventListener('click', savePos);
+  });
+
+  // harmonização por prato
+  document.querySelectorAll('.food-card').forEach(function(card){
+    card.addEventListener('click', savePos);
+  });
+
+  // escala de corpo (leve a encorpado)
+  document.querySelectorAll('.body-point').forEach(function(pt){
+    pt.addEventListener('click', savePos);
+  });
+
+  // o botão aparece sempre que a página estiver rolada, tipo "voltar ao topo"
+  function toggleVisibility(){
+    if(window.scrollY > 220){
+      backBtn.classList.add('show');
+    } else {
+      backBtn.classList.remove('show');
+    }
+  }
+  window.addEventListener('scroll', toggleVisibility);
+  toggleVisibility();
+})();
+</script>
+
 <script>
 (function(){
   var STORAGE_KEY = 'advz_age_verified';
